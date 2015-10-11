@@ -27,4 +27,6 @@ $app->get('/cowsay', function() use($app) {
     return "<pre>".\League\Cowsayphp\Cow::say("Cool beans")."</pre>";
 });
 
+echo "some text blues";
+
 $app->run();
