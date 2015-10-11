@@ -8,7 +8,7 @@
 
 
 if (isset($_GET['q'])) {
-    echo $_GET['q'];
+    echo "your search is: " . $_GET['q'];
 }
 
 ?>
