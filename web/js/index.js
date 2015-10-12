@@ -6,7 +6,7 @@ $(document).ready( function() {
 });
 
 function searchFor( query ) {
-    $.get( "../back/search.php?q=" + query, function( data ) {
+    $.get( "/web/search.php?q=" + query, function( data ) {
     console.log('search returned: ' + data);
     });
 }
