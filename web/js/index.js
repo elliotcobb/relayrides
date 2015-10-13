@@ -2,47 +2,52 @@
  * Created by elliotcobb on 10/11/15.
  */
 
-$(document).ready( function() {
-    searchFor("LAX", "04/20/2016", "04/22/2016");
+$(function() {
+    $( "#datepicker-start" ).datepicker();
+    $( "#datepicker-end" ).datepicker();
 });
 
-function searchFor( query, date1, date2 ) {
-    var target_url = "/web/search.php?dest=" + query + "&date1=" + date1 + "&date2=" + date2;
+// initialize AngularJS
+var rrApp = angular.module('rrApp', []);
+
+rrApp.searchFor = function( destination, date1, date2 ) {
+    var target_url = "search.php?dest=" + destination + "&date1=" + date1 + "&date2=" + date2;
+
     $.get( target_url, function( data ) {
         console.log("search result: ");
-        var search_results = JSON.parse( data );
-        if (search_results['Result']['CarResult'] === undefined) {
-            console.log('errors abound');
-            console.log(search_results);
+        rrApp.search_results = JSON.parse( data );
+        if (rrApp.search_results['Result']['CarResult'] === undefined) {
+            // API response error
+            console.log(rrApp.search_results);
+            return "API response error";
         } else {
-            console.log('no errors here');
-            buildSearchResults( search_results );
+            // response detected
+            rrApp.buildSearchResults();
         }
     });
-}
+};
 
-function buildSearchResults( search_results ) {
-    console.log(search_results);
-    var car_array = search_results['Result']['CarResult'];
-    var car_array_length = car_array.length;
-    var result_div;
-    var heading_id;
-    var collapse_id;
 
-    for (var i = 0; i < car_array_length; i++) {
-        result_div = $('.clone-content .car-result.clone').clone();
-        result_div.find('.panel-title .title-link').append(i + '. ' + car_array[i]['DailyRate'] + ' Airport: ' + car_array[i]['PickupAirport']);
-        result_div.find('.panel-body').append('<br>Date: ' + car_array[i]['PickupDay'] + '<br>');
-        result_div.find('.panel-body .make-reservation').attr('href', car_array[i]['DeepLink']);
-
-        collapse_id = "collapse-" + i;
-        heading_id = "heading-" + i;
-        result_div.find('.panel-heading').attr('id', heading_id);
-        result_div.find('#collapseOne').attr('id', collapse_id).attr('aria-labelledby', heading_id);
-        result_div.find('.title-link').attr('aria-controls', collapse_id).attr('href', "#" + collapse_id);
-
-        result_div.removeClass('clone');
-        $('#accordion').append(result_div);
-        //console.log(result_div);
+rrApp.getCarType = function ( car_code ) {
+    var car_types = rrApp.search_results['MetaData']['CarMetaData']['CarTypes']['CarType'];
+    var car_types_length = car_types.length;
+    for (var i = 0; i < car_types_length; i++) {
+        if (car_types[i]['CarTypeCode'] == car_code) {
+            return car_types[i];
+        }
     }
-}
+    return "car type not found";
+};
+
+$(document).ready( function() {
+    rrApp.searchFor("LAX", "04/20/2016", "04/22/2016")
+});
+
+rrApp.controller('CarCtrl', function ($scope) {
+    rrApp.buildSearchResults = function() {
+        $scope.getCarType = rrApp.getCarType;
+        $scope.searchFor = rrApp.searchFor;
+        $scope.search_results = rrApp.search_results;
+        $scope.cars = rrApp.search_results['Result']['CarResult'];
+    };
+});
