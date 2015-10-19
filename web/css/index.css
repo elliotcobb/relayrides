@@ -5,3 +5,32 @@
 body {
     padding: 3px;
 }
+
+.search-form {
+    display: inline-block;
+    width: 100%;
+}
+
+.form-elem {
+    float: left;
+}
+
+.form-elem-left {
+    margin-left: 5%;
+}
+
+.form-elem-right {
+    margin-left: 10px;
+}
+
+#search-destination {
+    display: inline-block;
+}
+
+#accordion {
+    margin-top: 10px;
+}
+
+.error-message {
+    color: red;
+}

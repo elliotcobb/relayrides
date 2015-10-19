@@ -22,6 +22,8 @@ rrApp.searchFor = function( destination, date1, date2 ) {
 };
 
 
+// given a Hotwire car code ex: "ECAR" "CCAR",
+// returns the full english name or "car type not found"
 rrApp.getCarType = function ( car_code ) {
     var car_types = rrApp.search_results['MetaData']['CarMetaData']['CarTypes']['CarType'];
     var car_types_length = car_types.length;

@@ -19,50 +19,61 @@
 </head>
 
 <body ng-controller="CarCtrl">
-<div class="header">
-    <div class="page-header">
-        <h1 class="header-title">Wheel Swap<br><small>Cool Car Rental</small></h1>
-    </div>
-</div>
-
-<div class="main-content">
-    <!-- Search Parameters HTML Form -->
-    <div class="search-form">
-        <p>Destination:
-            <select class="form-control" placeholder="Destination" ng-model="destination">
-                <option>LAX</option>
-                <option>DIA</option>
-                <option>SFO</option>
-            </select>
-        </p>
-        <input type="text" placeholder="Start Date" id="datepicker-start" ng-model="date1">
-        <input type="text" placeholder="End Date" id="datepicker-end" ng-model="date2">
-        <button class="btn btn-default search-submit" type="submit">Search</button>
+    <div class="header">
+        <div class="page-header">
+            <h1 class="header-title">Wheel Swap<br><small>Cool Car Rental</small></h1>
+        </div>
     </div>
 
-    <!-- Search Results Accordion -->
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default car-result" ng-repeat="car in cars track by $index">
-            <div class="panel-heading" role="tab" id="heading-{{$index}}">
-                <h4 class="panel-title">
-                    <a class="title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$index}}" aria-expanded="true" aria-controls="collapse-$index">
-                        ${{car.DailyRate}} /day {{getCarType(car.CarTypeCode).CarTypeName}}
-                    </a>
-                </h4>
+    <div class="main-content">
+        <div class="search-form">
+            <h4 class="form-elem-left">Car Search</h4>
+            <div class="form-elem form-elem-left">
+                <!--<select id="search-destination" class="form-control search-required" placeholder="Destination" ng-model="search.destination">-->
+                    <!--<option value="" selected disabled>Destination</option>-->
+                    <!--<option>LAX</option>-->
+                    <!--<option>DIA</option>-->
+                    <!--<option>SFO</option>-->
+                <!--</select>-->
+                <input type="text" class="search-required" id="search-destination" placeholder="Destination" ng-model="search.destination">
             </div>
-            <div id="collapse-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{$index}}">
-                <div class="panel-body">
-                    Seats {{getCarType(car.CarTypeCode).TypicalSeating}}
-                    <br>
-                    Similar to: {{getCarType(car.CarTypeCode).PossibleModels}}
-                    <br>
-                    Features: {{getCarType(car.CarTypeCode).PossibleFeatures}}
-                    <a class="btn btn-default make-reservation" href="{{car.DeepLink}}" target="_blank" role="button">Reserve Car</a>
+            <div class="form-elem form-elem-right">
+                <label for="datepicker-start">From</label>
+                <input type="text" class="search-required" id="datepicker-start" name="datepicker-start" placeholder="Start Date" ng-model="search.date1">
+                <label for="datepicker-end">to</label>
+                <input type="text" class="search-required" id="datepicker-end" name="datepicker-end" placeholder="End Date" ng-model="search.date2">
+            </div>
+            <div class="form-elem form-elem-right">
+                <button class="btn btn-default search-submit" type="submit">Search</button>
+            </div>
+            <!--<div class="form-elem form-elem-right">-->
+                <!--<p class="error-message">Please fill in empty inputs</p>-->
+            <!--</div>-->
+        </div>
+
+        <!-- Search Results Accordion -->
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default car-result" ng-repeat="car in cars track by $index">
+                <div class="panel-heading" role="tab" id="heading-{{$index}}">
+                    <h4 class="panel-title">
+                        <a class="title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$index}}" aria-expanded="true" aria-controls="collapse-$index">
+                            ${{car.DailyRate}} /day {{getCarType(car.CarTypeCode).CarTypeName}}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{$index}}">
+                    <div class="panel-body">
+                        Seats {{getCarType(car.CarTypeCode).TypicalSeating}}
+                        <br>
+                        Similar to: {{getCarType(car.CarTypeCode).PossibleModels}}
+                        <br>
+                        Features: {{getCarType(car.CarTypeCode).PossibleFeatures}}
+                        <a class="btn btn-default make-reservation" href="{{car.DeepLink}}" target="_blank" role="button">Reserve Car</a>
+                    </div>
                 </div>
             </div>
         </div>
+        <script src="js/index-events.js" type="text/javascript"></script>
     </div>
-    <script src="js/index-events.js" type="text/javascript"></script>
-</div>
 </body>
 </html>
