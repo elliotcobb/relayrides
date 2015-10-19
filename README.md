@@ -1,23 +1,3 @@
-# php-getting-started
+RelayRides project by Elliot Cobb
 
-A barebones PHP app that makes use of the [Silex](http://silex.sensiolabs.org/) web framework, which can easily be deployed to Heroku.
-
-This application supports the [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) article - check it out.
-
-## Deploying
-
-Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
-
-```sh
-$ git clone git@github.com:heroku/php-getting-started.git # or clone your own fork
-$ cd php-getting-started
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-
-## Documentation
-
-For more information about using PHP on Heroku, see these Dev Center articles:
-
-- [PHP on Heroku](https://devcenter.heroku.com/categories/php)
+I built this from scratch over the past week or so. It was fun learning the smallest sliver of angularJs (I can see why it has so much potential) and incorporating my old knowledge of Bootstrap, PHP, etc. I know it said to only spend a few hours on this, but I wasn't able to pull myself away until I thought it was ready for showtime. I'm the kind of perfectionist who can't leave a project half way through so it still bugs me that I can't work on the color and look of the site more :) Thanks for the challenge!
