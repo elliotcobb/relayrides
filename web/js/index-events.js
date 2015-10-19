@@ -21,13 +21,6 @@ $('.search-submit').click( function() {
     }
 });
 
-// make search dynamic
-// add form incomplete warnings
-// add destinations
-// add color
-// add images?
-// release on heroku
-
 function isSearchFormComplete() {
     var complete_form = true;
     $('.search-form .search-required').each( function() {
