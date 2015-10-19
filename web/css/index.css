@@ -2,6 +2,10 @@
     padding-left: 4%;
 }
 
+h1 {
+    color: #00D043;
+}
+
 body {
     padding: 3px;
 }
@@ -13,6 +17,7 @@ body {
 
 .form-elem {
     float: left;
+    margin-top: 5px;
 }
 
 .form-elem-left {
@@ -38,4 +43,9 @@ body {
     float: left;
     display: none;
     margin-left: 5%;
+}
+
+.make-reservation {
+    background-color: #00D043;
+    color: #ffffff;
 }
