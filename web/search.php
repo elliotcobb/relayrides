@@ -25,9 +25,9 @@ function quickCURL( $url ) {
 if (isset($_GET['dest']) && isset($_GET['date1']) && isset($_GET['date2'])) {
 
     $curl_url = "http://api.hotwire.com/v1/search/car?apikey=" . API_KEY .
-                "&dest=" . $_GET['dest'] .
-                "&startdate=" . $_GET['date1'] .
-                "&enddate=" . $_GET['date2'] .
+                "&dest=" . urlencode($_GET['dest']) .
+                "&startdate=" . urlencode($_GET['date1']) .
+                "&enddate=" . urlencode($_GET['date2']) .
                 "&pickuptime=" . "9:00" .
                 "&dropofftime=" . "12:00";
 

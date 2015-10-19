@@ -29,12 +29,6 @@
         <div class="search-form">
             <h4 class="form-elem-left">Car Search</h4>
             <div class="form-elem form-elem-left">
-                <!--<select id="search-destination" class="form-control search-required" placeholder="Destination" ng-model="search.destination">-->
-                    <!--<option value="" selected disabled>Destination</option>-->
-                    <!--<option>LAX</option>-->
-                    <!--<option>DIA</option>-->
-                    <!--<option>SFO</option>-->
-                <!--</select>-->
                 <input type="text" class="search-required" id="search-destination" placeholder="Destination" ng-model="search.destination">
             </div>
             <div class="form-elem form-elem-right">
@@ -46,9 +40,8 @@
             <div class="form-elem form-elem-right">
                 <button class="btn btn-default search-submit" type="submit">Search</button>
             </div>
-            <!--<div class="form-elem form-elem-right">-->
-                <!--<p class="error-message">Please fill in empty inputs</p>-->
-            <!--</div>-->
+            <br>
+            <div class="alert alert-danger" role="alert"></div>
         </div>
 
         <!-- Search Results Accordion -->
@@ -68,6 +61,7 @@
                         Similar to: {{getCarType(car.CarTypeCode).PossibleModels}}
                         <br>
                         Features: {{getCarType(car.CarTypeCode).PossibleFeatures}}
+                        <br>
                         <a class="btn btn-default make-reservation" href="{{car.DeepLink}}" target="_blank" role="button">Reserve Car</a>
                     </div>
                 </div>

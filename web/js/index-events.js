@@ -11,7 +11,13 @@ const DEPARTURE_DATE = ".search-form #datepicker-end";
 // make sure this file is loaded after index.js
 $('.search-submit').click( function() {
     if (isSearchFormComplete()) {
-        rrApp.searchFor($(DESTINATION).val(), $(ARRIVAL_DATE).val(), $(DEPARTURE_DATE).val());
+        $('.search-form .alert').hide();
+        var destination = encodeURI($(DESTINATION).val());
+        var arrival_date = encodeURI($(ARRIVAL_DATE).val());
+        var departure_date = encodeURI($(DEPARTURE_DATE).val());
+        rrApp.searchFor(destination, arrival_date, departure_date);
+    } else {
+        $('.search-form .alert').text('Not so fast! Fill in a destination and both dates').css('display', 'inline-block');
     }
 });
 
@@ -27,8 +33,6 @@ function isSearchFormComplete() {
     $('.search-form .search-required').each( function() {
         if ($(this).val() == "") {
             complete_form = false;
-        } else {
-            $(this).removeClass('error');
         }
     });
     return complete_form;

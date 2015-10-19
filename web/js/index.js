@@ -2,6 +2,8 @@
  * Created by elliotcobb on 10/11/15.
  */
 
+const SUCCESS_CODE = 0;
+
 // initialize AngularJS
 var rrApp = angular.module('rrApp', []);
 
@@ -10,12 +12,15 @@ rrApp.searchFor = function( destination, date1, date2 ) {
 
     $.get( target_url, function( data ) {
         rrApp.search_results = JSON.parse( data );
-        if (rrApp.search_results['Result']['CarResult'] === undefined) {
+        if (rrApp.search_results['StatusCode'] != SUCCESS_CODE) {
             // API response error
-            console.log(rrApp.search_results);
-            return "API response error";
+            console.log("API response error");
+            $('.search-form .alert').text('Whoops! Check for typos in your date parameters.').show();
+            $('#accordion').hide();
         } else {
             // response detected
+            $('.search-form .alert').hide();
+            $('#accordion').show();
             rrApp.buildSearchResults();
         }
     });
@@ -36,11 +41,11 @@ rrApp.getCarType = function ( car_code ) {
 };
 
 rrApp.controller('CarCtrl', function ($scope) {
-    rrApp.buildSearchResults = function() {
 
-        console.log(rrApp.search_results)
-        $scope.getCarType = rrApp.getCarType;
-        $scope.searchFor = rrApp.searchFor;
+    $scope.getCarType = rrApp.getCarType;
+    $scope.searchFor = rrApp.searchFor;
+
+    rrApp.buildSearchResults = function() {
         $scope.search_results = rrApp.search_results;
         $scope.cars = rrApp.search_results['Result']['CarResult'];
         $scope.$apply();

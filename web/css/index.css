@@ -28,9 +28,17 @@ body {
 }
 
 #accordion {
+    display: none;
     margin-top: 10px;
 }
 
 .error-message {
     color: red;
+}
+
+.alert-danger {
+    clear: both;
+    float: left;
+    display: none;
+    margin-left: 5%;
 }
